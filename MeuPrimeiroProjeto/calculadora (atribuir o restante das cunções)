@@ -1,0 +1,225 @@
+package br.pe.senac.Calculadora;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Tela extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+    private final JPanel contentPanel = new JPanel();
+    private JTextField textField;
+    private JTextField textField_1;
+    private JTextField textField_2;
+
+    private double num1, num2, result;
+    private String operator = "";
+
+    /**
+     * Lança a aplicação.
+     */
+    public static void main(String[] args) {
+        try {
+            Tela dialog = new Tela();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Cria o diálogo.
+     */
+    public Tela() {
+        setBounds(100, 100, 491, 385);
+        getContentPane().setLayout(new BorderLayout());
+        contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        getContentPane().add(contentPanel, BorderLayout.CENTER);
+        contentPanel.setLayout(null);
+
+        JLabel lblNewLabel = new JLabel("Calculadora");
+        lblNewLabel.setBounds(202, 22, 84, 14);
+        contentPanel.add(lblNewLabel);
+
+        JLabel lblNewLabel_1 = new JLabel("Valor #1");
+        lblNewLabel_1.setBounds(43, 62, 69, 14);
+        contentPanel.add(lblNewLabel_1);
+
+        textField = new JTextField();
+        textField.setBounds(43, 87, 86, 20);
+        contentPanel.add(textField);
+        textField.setColumns(10);
+
+        JLabel lblNewLabel_1_1 = new JLabel("Valor #2");
+        lblNewLabel_1_1.setBounds(43, 142, 69, 14);
+        contentPanel.add(lblNewLabel_1_1);
+
+        textField_1 = new JTextField();
+        textField_1.setColumns(10);
+        textField_1.setBounds(43, 167, 86, 20);
+        contentPanel.add(textField_1);
+
+        JLabel lblNewLabel_1_2 = new JLabel("Resultado");
+        lblNewLabel_1_2.setBounds(43, 246, 69, 14);
+        contentPanel.add(lblNewLabel_1_2);
+
+        textField_2 = new JTextField();
+        textField_2.setColumns(10);
+        textField_2.setBounds(43, 271, 86, 20);
+        contentPanel.add(textField_2);
+
+        // Botões para os números e operações
+        JButton btnNewButton = new JButton("1");
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textField.setText(textField.getText() + "1");
+            }
+        });
+        btnNewButton.setBounds(197, 62, 50, 40);
+        contentPanel.add(btnNewButton);
+
+        JButton btnNewButton_1 = new JButton("2");
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textField.setText(textField.getText() + "2");
+            }
+        });
+        btnNewButton_1.setBounds(264, 62, 50, 40);
+        contentPanel.add(btnNewButton_1);
+
+        JButton btnNewButton_2 = new JButton("3");
+        btnNewButton_2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textField.setText(textField.getText() + "3");
+            }
+        });
+        btnNewButton_2.setBounds(334, 62, 50, 40);
+        contentPanel.add(btnNewButton_2);
+
+        // Outros botões numéricos (4 a 9, 0)
+        // Adicione listeners de ação para os números de 4 a 9 e o 0...
+
+        JButton btnNewButton_2_3 = new JButton("/");
+        btnNewButton_2_3.setBounds(399, 62, 50, 40);
+        btnNewButton_2_3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                num1 = Double.parseDouble(textField.getText());
+                textField.setText("");
+                operator = "/";
+            }
+        });
+        contentPanel.add(btnNewButton_2_3);
+
+        JButton btnNewButton_2_1_1 = new JButton("*");
+        btnNewButton_2_1_1.setBounds(399, 113, 50, 40);
+        btnNewButton_2_1_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                num1 = Double.parseDouble(textField.getText());
+                textField.setText("");
+                operator = "*";
+            }
+        });
+        contentPanel.add(btnNewButton_2_1_1);
+
+        JButton btnNewButton_2_2_1 = new JButton("-");
+        btnNewButton_2_2_1.setBounds(399, 167, 50, 40);
+        btnNewButton_2_2_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                num1 = Double.parseDouble(textField.getText());
+                textField.setText("");
+                operator = "-";
+            }
+        });
+        contentPanel.add(btnNewButton_2_2_1);
+
+        JButton btnNewButton_2_2_1_1 = new JButton("+");
+        btnNewButton_2_2_1_1.setBounds(399, 220, 50, 40);
+        btnNewButton_2_2_1_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                num1 = Double.parseDouble(textField.getText());
+                textField.setText("");
+                operator = "+";
+            }
+        });
+        contentPanel.add(btnNewButton_2_2_1_1);
+
+        JButton btnNewButton_2_2_2 = new JButton("=");
+        btnNewButton_2_2_2.setBounds(334, 220, 50, 40);
+        btnNewButton_2_2_2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                num2 = Double.parseDouble(textField.getText());
+                switch (operator) {
+                    case "+":
+                        result = num1 + num2;
+                        break;
+                    case "-":
+                        result = num1 - num2;
+                        break;
+                    case "*":
+                        result = num1 * num2;
+                        break;
+                    case "/":
+                        if (num2 != 0) {
+                            result = num1 / num2;
+                        } else {
+                            textField_2.setText("Erro");
+                            return;
+                        }
+                        break;
+                }
+                textField_2.setText(String.valueOf(result));
+            }
+        });
+        contentPanel.add(btnNewButton_2_2_2);
+
+        JButton btnNewButton_4_1 = new JButton("CE");
+        btnNewButton_4_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textField.setText("");
+                textField_1.setText("");
+                textField_2.setText("");
+                textField.requestFocus();
+            }
+        });
+        btnNewButton_4_1.setBounds(197, 220, 50, 40);
+        contentPanel.add(btnNewButton_4_1);
+        
+        JButton btnNewButton_3 = new JButton("4");
+        btnNewButton_3.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnNewButton_3.setBounds(197, 113, 50, 40);
+        contentPanel.add(btnNewButton_3);
+        
+        JButton btnNewButton_4 = new JButton("5");
+        btnNewButton_4.setBounds(264, 113, 50, 40);
+        contentPanel.add(btnNewButton_4);
+        
+        JButton btnNewButton_5 = new JButton("6");
+        btnNewButton_5.setBounds(334, 113, 50, 40);
+        contentPanel.add(btnNewButton_5);
+        
+        JButton btnNewButton_6 = new JButton("7");
+        btnNewButton_6.setBounds(197, 166, 50, 40);
+        contentPanel.add(btnNewButton_6);
+        
+        JButton btnNewButton_7 = new JButton("8");
+        btnNewButton_7.setBounds(264, 166, 50, 40);
+        contentPanel.add(btnNewButton_7);
+        
+        JButton btnNewButton_8 = new JButton("9");
+        btnNewButton_8.setBounds(334, 166, 50, 40);
+        contentPanel.add(btnNewButton_8);
+
+        // Adicione outros botões e configure seus listeners de ação conforme necessário...
+    }
+}
